@@ -1,4 +1,4 @@
-$("td").click(function(){
+$("td").click(function(){//click another day to switch to that day
     var tr = $(this).parents("tr");
     var td = tr.children("td");
     var i = 0;
@@ -20,7 +20,7 @@ $("td").click(function(){
     switchDay(today,newDay);
 });
 
-$(".task-today .task").click(function(){
+$(".task-today .task").click(function(){// click certain task and jump to the edit page
     var from = $(this).attr("from");
     var to = $(this).attr("to");
     var name = $(this).attr("name");
@@ -44,7 +44,7 @@ $(".task-today .task").click(function(){
     window.location.href = text;
 })
 
-function switchDay(today, newDay) {
+function switchDay(today, newDay) {// change the display of current today and the clicked day
     today.animate({width:'145.7px'});
     today.removeClass("today");
     newDay.animate({width:'340px'});
@@ -89,7 +89,7 @@ function switchDay(today, newDay) {
     rewriteToday(today, todayTasks);
 }
 
-function rewriteNewDay(newDay, newTasks) {
+function rewriteNewDay(newDay, newTasks) {// rewrite the clicked day
     var text = '<div class = "up-block"><i class = "material-icons">keyboard_arrow_up</i></div><div class = "scroller"><div class = "task-today">';
     for (var i = 0; i < newTasks.length; i++){
         text += '<div class="type' + newTasks[i].type + ' time from">'+
@@ -175,7 +175,7 @@ function rewriteToday(today, todayTasks) {
     $(today).html(text);
 }
 
-function addTask() {
+function addTask() {// jump to add task
     var Class = GetQueryString("class");
     var defaultTime = GetQueryString("defaultTime");
     var user  = GetQueryString("user");
@@ -184,7 +184,7 @@ function addTask() {
     window.location.href="addTask.html?class=" + Class + "&&defaultTime=" + defaultTime + "&&user=" + user + "&&tel=" + tel + "&&email=" + email;
 }
 
-function profile() {
+function profile() {// jump to profile
     var href = window.location.href.split("?");
     if (href.length == 2)
         window.location.href="profile.html"+"?"+href[1];
@@ -192,7 +192,7 @@ function profile() {
         window.location.href="profile.html";
 }
 
-function monthview() {
+function monthview() {// switch to month view
     var href = window.location.href.split("?");
     if (href.length == 2)
         window.location.href="calendar.html"+"?"+href[1];
@@ -200,7 +200,7 @@ function monthview() {
         window.location.href="calendar.html";
 }
 
-$(document).ready(function(){
+$(document).ready(function(){// initialize
     var method=GetQueryString("method");
     var weekNo=GetQueryString("weekNo");
     if (method == "edit"){
@@ -263,14 +263,14 @@ $(document).ready(function(){
     else if (weekNo == "2") weekChange(1);
 })
 
-function GetQueryString(name)
+function GetQueryString(name)// analyse the URL and get the info of modification
 {
      var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
      var r = window.location.search.substr(1).match(reg);
      if(r!=null)return  unescape(r[2]); return null;
 }
 
-function addTaskToCalendar(){
+function addTaskToCalendar(){// add a new task to the calendar
     var title = GetQueryString("title");
     var location = GetQueryString("location");
     var sd = GetQueryString("start_date");
@@ -384,7 +384,7 @@ function addTaskToCalendar(){
 
 
 
-function editTaskToCalendar(argu){
+function editTaskToCalendar(argu){// modify a exist task in the calendar
     var title = GetQueryString("title");
     var location = GetQueryString("location");
     var sd = GetQueryString("start_date");
@@ -529,7 +529,7 @@ function editTaskToCalendar(argu){
     rewriteToday(newDay, newTasks);
 }
 
-function weekChange(PN) {
+function weekChange(PN) {// change the current week
     var weeks = $(".weekCalender");
     var i = 0;
     for (; i < weeks.length; i++){
@@ -563,7 +563,7 @@ function weekChange(PN) {
     }
 }
 
-function deleteTaskToCalendar(){
+function deleteTaskToCalendar(){// delete a task from the calendar
     var id = GetQueryString("id");
     $("#"+id).remove();
 }
